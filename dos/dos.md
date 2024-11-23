@@ -31,5 +31,8 @@ This will create a database in MongoDB called __infodisclosure__. Verify its pre
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts** that can lead to a DoS attack.
+The insecure.ts application lacks rate limiting, allowing attackers to flood the server with requests, potentially overwhelming it. Additionally, the id query parameter is used directly in the database query without validation, which can cause inefficiencies or even crashes.
 2. Briefly explain how a malicious attacker can exploit them.
+Malicious users can exploit the lack of rate limiting by sending a large number of requests, causing a DoS attack by overloading the server. The unvalidated inputs allow attackers to inject large or malformed data, potentially leading to resource-intensive database queries that degrade performance.
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the DoS vulnerability?
+secure.ts mitigates DoS risks by implementing rate limiting, which restricts requests to 1 per IP every 5 seconds, reducing the impact of flooding attacks. It also includes error handling with a try-catch block to prevent crashes and provides proper error responses when something goes wrong.

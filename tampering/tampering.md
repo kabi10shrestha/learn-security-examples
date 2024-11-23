@@ -25,5 +25,8 @@ This example demonstrates tampering through script injection.
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts**
+Insecure.ts has two vulnerabilities: it lacks input sanitization for user-submitted names, which makes it vulnerable to XSS attacks, and while the session cookie is marked as httpOnly, there is no protection against CSRF attacks due to the absence of the sameSite attribute on cookies.
 2. Briefly explain how a malicious attacker can exploit them.
+An attacker can inject malicious scripts into the input field (via XSS) or trick users into submitting a forged request (via CSRF), leading to unauthorized actions or data theft.
 3. Briefly explain why **secure.ts** does not have the same vulnerabilties?
+Secure.ts mitigates these vulnerabilities by sanitizing user inputs with escapeHTML to prevent XSS and by setting sameSite: 'strict' on the session cookie to protect against CSRF attacks.
